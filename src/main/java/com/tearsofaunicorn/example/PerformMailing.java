@@ -5,9 +5,10 @@ import org.apache.deltaspike.cdise.api.CdiContainerLoader;
 import org.apache.deltaspike.core.api.projectstage.ProjectStage;
 import org.apache.deltaspike.core.api.provider.BeanProvider;
 
-public class PerformGreeting {
+public class PerformMailing {
 
     public static void main(String[] args) throws Exception {
+
         System.out.println("System environment variable 'environment' == " + System.getenv("environment"));
 
         System.out.println("Starting CDI container");
@@ -18,9 +19,11 @@ public class PerformGreeting {
         ProjectStage projectStage = BeanProvider.getContextualReference(ProjectStage.class, false);
         System.out.println("Configured ProjectStage == " + projectStage);
 
-        Greeter greeter = BeanProvider.getContextualReference(Greeter.class, false);
-        System.out.println("Injected Greeter class == " + greeter.getClass().getSimpleName());
-        System.out.println("Greeting => " + greeter.greet());
+        Mailer mailer = BeanProvider.getContextualReference(Mailer.class, false);
+        System.out.println("Injected Mailer class == " + mailer.getClass().getSimpleName());
+
+        Mail message = new Mail("foo@example.com", "Test email sending", "Hello, World!");
+        mailer.sendMail(message);
 
         cdiContainer.shutdown();
     }

@@ -4,14 +4,14 @@ import org.apache.deltaspike.core.api.exclude.Exclude;
 import org.apache.deltaspike.core.api.projectstage.ProjectStage;
 
 /**
- * Implementation of a Greeter which prints a pleasant message
+ * Implementation of a Mailer which just swallows the mail
  */
 @Exclude(exceptIfProjectStage = ProjectStage.UnitTest.class)
-public class PleasantGreeter implements Greeter {
+public class NullMailer implements Mailer {
 
     @Override
-    public String greet() {
-        return "Good morning";
+    public void sendMail(Mail mail) {
+        System.out.println("Discarding mail to /dev/null");
     }
 
 }

@@ -6,7 +6,7 @@ import org.apache.deltaspike.core.api.projectstage.ProjectStage;
 import org.apache.deltaspike.core.spi.config.ConfigSource;
 
 /**
- * Implementation of Deltaspike ConfigSource to set the ProjectStage based off an "env" environment variable
+ * Implementation of Deltaspike ConfigSource to set the ProjectStage based off an "environment" variable
  */
 public class CdiConfigSource implements ConfigSource {
 
@@ -15,11 +15,10 @@ public class CdiConfigSource implements ConfigSource {
 
     public CdiConfigSource() {
         this.mapping = new HashMap<>();
-        this.mapping.put("dev", ProjectStage.Development);
+        this.mapping.put("development", ProjectStage.Development);
         this.mapping.put("test", ProjectStage.UnitTest);
-        this.mapping.put("int", ProjectStage.IntegrationTest);
-        this.mapping.put("stage", ProjectStage.Staging);
-        this.mapping.put("prod", ProjectStage.Production);
+        this.mapping.put("staging", ProjectStage.Staging);
+        this.mapping.put("production", ProjectStage.Production);
 
         this.properties = new HashMap<>();
         String env = System.getenv("environment");
